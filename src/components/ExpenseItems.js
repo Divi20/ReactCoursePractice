@@ -4,11 +4,15 @@
 //className istead of class becuase class is a keyword in js
 import './ExpenseItems.css'
 function ExpenseItems() {
+
+    const expenseDate = new Date(2021, 2, 28);
+    const expenseTitle = 'Car Insurance';
+    const expenseAmount = 294.67;
     return (
         <div className="expense-item">
-            <div>March 28th 2021</div>
+            <div>{expenseDate.toLocaleString('en-US', {month:'long'})}</div>
             <div className="expense-item__description">
-            <h2>Car Insurance</h2>
+            <h2>Car Insurance {1+1}</h2>
             <div className="expense-item__pr"> $294.67</div>
             </div>
         </div>
