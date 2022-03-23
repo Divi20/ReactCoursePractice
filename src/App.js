@@ -3,7 +3,7 @@ import './App.css';
 import ExpenseItems from './components/ExpenseItems';
 function App() {
   return (
-    <div className="App">
+    <div>
       <h2>Lets get started</h2>
       <ExpenseItems/>
     </div>
