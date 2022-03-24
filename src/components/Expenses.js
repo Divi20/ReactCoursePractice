@@ -1,12 +1,29 @@
+import { useState } from "react";
 import ExpenseItems from "./ExpenseItems";
+import Card from "./Card";
 import './Expenses.css';
+import ExpenseFilter from "./ExpenseFilter";
 function Expenses( props) {
-    const expenses = props.expenses;
-    return <div className="card expenses">
-    <ExpenseItems title = {expenses[0].title} amount={expenses[0].amount} date={expenses[0].date}/>
-      <ExpenseItems title = {expenses[1].title} amount={expenses[1].amount} date={expenses[1].date}/>
-      <ExpenseItems title = {expenses[2].title} amount={expenses[2].amount} date={expenses[2].date}/>
-      <ExpenseItems title = {expenses[3].title} amount={expenses[3].amount} date={expenses[3].date}/>
+    const exp = props.expenses;
+    const [expensesVar, setExpensesVar] = useState(exp);
+
+    const updateExpensesDisplayList = (year) =>{
+     var exList =  expensesVar.filter((ex) =>{
+      return ex.date.getFullYear() == year;
+      })
+
+      setExpensesVar(exList)
+    }
+
+    return <div>
+    <ExpenseFilter filterExpensesList = {updateExpensesDisplayList}/>
+      <Card className="expenses">
+        {
+          expensesVar.map((ex, i) => {
+            return <ExpenseItems title={ex.title} amount={ex.amount} date={ex.date} key={i} />
+          })
+        }
+      </Card>
     </div>
 
 }

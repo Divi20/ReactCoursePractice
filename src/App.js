@@ -1,9 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
 import Expenses from './components/Expenses';
+import NewExpense from './components/NewExpense';
+import { useState } from 'react';
 function App() {
 
-  const expenses = [
+  const expensesVar = [
     {
       id: 'e1',
       title: 'Toilet Paper',
@@ -24,9 +25,19 @@ function App() {
       date: new Date(2021, 5, 12),
     },
   ];
+
+  const [expenses, setExpenses] = useState(expensesVar)
+
+  const addExpenseHandler = expense =>{
+    setExpenses((prev)=>{
+      return [...prev, expense]
+    })
+  }
+
   return (
     <div>
       <h2>Lets get started</h2>
+      <NewExpense onAddExpense={addExpenseHandler}/>
       <Expenses expenses={expenses}/>
     </div>
   );
