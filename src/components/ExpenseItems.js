@@ -6,19 +6,27 @@ import './ExpenseItems.css'
 import ExpenseDate from './ExpenseDate';
 import Card from './Card';
 function ExpenseItems(props) {
-
-    const expenseDate = new Date(2021, 2, 28);
-    const expenseTitle = 'Car Insurance';
-    const expenseAmount = 294.67;
-
     const {title, amount, date} = props;
+
+    let temp = title;
+
+    //this gets consoled but render function is not called , so we need useState which has state and set Function , which changes the state and then calls the render function
+    
+
+    const clickHandler = () =>{
+       temp= 'Updated!'
+       console.log('title', temp);
+    }
+
+    
     return (
         <Card className="expense-item">
            <ExpenseDate date={date}/>
             <div className="expense-item__description">
-            <h2> {title}</h2>
+            <h2> {temp}</h2>
             <div className="expense-item__pr"> ${amount}</div>
             </div>
+            <button onClick={clickHandler}>Change Title</button>
         </Card>
     )
 }
