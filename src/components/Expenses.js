@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ExpenseItems from "./ExpenseItems";
 import Card from "./Card";
 import './Expenses.css';
 import ExpenseFilter from "./ExpenseFilter";
+import ExpensesChart from './ExpensesChart';
 function Expenses( props) {
-    const exp = props.expenses;
-    const [expensesVar, setExpensesVar] = useState(exp);
-
+    const [expensesVar, setExpensesVar] = useState(props.expenses);
+    console.log("test exp2", expensesVar)
     const updateExpensesDisplayList = (year) =>{
-     var exList =  expensesVar.filter((ex) =>{
-      return ex.date.getFullYear() == year;
+     var exList =  props.expenses.filter((ex) =>{
+      return ex.date.getFullYear().toString() === year;
       })
 
       setExpensesVar(exList)
@@ -17,6 +17,7 @@ function Expenses( props) {
 
     return <div>
     <ExpenseFilter filterExpensesList = {updateExpensesDisplayList}/>
+    <ExpensesChart expenses={expensesVar} />
       <Card className="expenses">
         {
           expensesVar.map((ex, i) => {

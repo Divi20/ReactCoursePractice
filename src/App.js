@@ -29,15 +29,30 @@ function App() {
   const [expenses, setExpenses] = useState(expensesVar)
 
   const addExpenseHandler = expense =>{
+    console.log("xygv", expense)
     setExpenses((prev)=>{
       return [...prev, expense]
     })
+    console.log(expenses)
+  }
+
+  const [openForm, setOpenForm] = useState(false);
+
+  const openAddFormHandler = () =>{
+    setOpenForm(!openForm);
+    console.log(openForm)
   }
 
   return (
     <div>
       <h2>Lets get started</h2>
-      <NewExpense onAddExpense={addExpenseHandler}/>
+      {  openForm ? 
+      <NewExpense onAddExpense={addExpenseHandler} closeForm={openAddFormHandler}/>
+      :
+      <div className="new-expense" style={{display: "flex", justifyContent : "center", alignItems : "center"}}>
+      <button type='button' onClick={openAddFormHandler}> Add Expense Form</button>
+      </div> 
+      }
       <Expenses expenses={expenses}/>
     </div>
   );
